@@ -3,6 +3,7 @@ import requests
 import datetime, pytz
 from dotenv import load_dotenv
 import os
+PORT = int(os.environ.get('PORT', 5000))
 load_dotenv()
 
 
@@ -149,7 +150,8 @@ def main() -> None:
     )
     dispatcher.add_handler(conv_handler)
 
-    updater.start_polling()
+    updater.start_webhook(listen="0.0.0.0", port=int(PORT), url_path=bot_token)
+    updater.bot.setWebhook('https://careloriebot.herokuapp.com/' + bot_token)
     updater.idle() # ensuress that there wont be any clashes
 
 if __name__ == '__main__':
