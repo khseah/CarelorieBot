@@ -24,6 +24,7 @@ def helps(update, context):
         '/unsetdinner : Unset dinner reminder\n'
         '/diary dd/mm/yyyy : Check food diary\n'
         '/removeitem dd/mm/yyyy : Remove food entry\n'
+        '/quiz : Quiz to test your knowledge\n'
         f"{'-'*44}\n"
     )
 
