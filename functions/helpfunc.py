@@ -15,7 +15,6 @@ def helps(update, context):
         '/calories : Receive calories of food intake\n'
         '/healthfacts : Obtain health tips and facts\n'
         '/bmi : Calculate your bmi\n'
-        '/cancel : Cancel current command\n'
         '/reminderbreakfast : Set breakfast reminder\n'
         '/reminderlunch : Set lunch reminder\n'
         '/reminderdinner : Set dinner reminder\n'
@@ -25,6 +24,7 @@ def helps(update, context):
         '/diary dd/mm/yyyy : Check food diary\n'
         '/removeitem dd/mm/yyyy : Remove food entry\n'
         '/quiz : Quiz to test your knowledge\n'
+        '/cancel : Cancel current command\n'
         f"{'-'*44}\n"
     )
 
