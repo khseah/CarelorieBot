@@ -2,6 +2,9 @@ import requests
 import pymongo
 from pymongo import MongoClient
 from datetime import date
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
 from telegram.ext import (
@@ -15,7 +18,11 @@ from telegram.ext import (
 
 FOOD = range(1)
 DELETEITEM,CONFIRMDELETE = range(2)
-cluster = MongoClient("CLUSTER_URL")
+
+API_KEY = os.getenv("API_KEY")
+
+CLUSTER_URL = os.getenv("CLUSTER_URL")
+cluster = MongoClient(CLUSTER_URL)
 db = cluster["Careloriebot"]
 collection = db["Calories"]
 
@@ -38,7 +45,7 @@ def get_calorie(update: Update, _: CallbackContext) -> int:
     food_input = str(update.message.text)
     endpoint = 'https://api.calorieninjas.com/v1/nutrition?query='
     query = food_input
-    response = requests.get(endpoint + query, headers={'X-Api-Key': 'YOUR_API_KEY'}) #input own api key
+    response = requests.get(endpoint + query, headers={'X-Api-Key': API_KEY}) #input own api key
     if not response.json()["items"]:
         update.message.reply_text(
             'Sorry ' + food_input + ' is not in our database\n'

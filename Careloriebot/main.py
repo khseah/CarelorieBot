@@ -1,6 +1,9 @@
 import logging
 import requests
 import datetime, pytz
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 
 from functions.helpfunc import helps
@@ -12,7 +15,7 @@ from functions.caloriefunc import calories, add_entry, get_calorie, diary, delet
 from functions.quizfunc import quiz_start, quiz_cancel, quiz_qns
 
 # Set your bot_token here
-bot_token = "YOUR_BOT_KEY" #input own bot key
+bot_token = os.getenv("BOT_TOKEN") #input own bot key
 
 # Importing python-telegram-bot's library functions
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
