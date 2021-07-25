@@ -14,15 +14,15 @@ HOUR_B, MIN_B, HOUR_L, MIN_L, HOUR_D, MIN_D = range(6)
 
 def breakfast(context: CallbackContext) -> None: #Reminder message for breakfast
     job = context.job
-    context.bot.send_message(job.context, text= u"\uE325" +'Time to input what you ate for breakfast!!'  + u"\uE325" + '\n\n' + "Let's go /calories")
+    context.bot.send_message(job.context, text= u"\uE325" +'Time to input what you ate for breakfast'  + u"\uE325" + '\n\n' + "Let's go /calories")
 
 def lunch(context: CallbackContext) -> None: #Reminder message for lunch
     job = context.job
-    context.bot.send_message(job.context, text=u"\uE325" + 'Time to input what you ate for lunch!!' + u"\uE325" + '\n\n' + "Let's go /calories")
+    context.bot.send_message(job.context, text=u"\uE325" + 'Time to input what you ate for lunch' + u"\uE325" + '\n\n' + "Let's go /calories")
 
 def dinner(context: CallbackContext) -> None: #Reminder message for dinner
     job = context.job
-    context.bot.send_message(job.context, text=u"\uE325" + 'Time to input what you ate for dinner!!' + u"\uE325" + '\n\n' + "Let's go /calories")
+    context.bot.send_message(job.context, text=u"\uE325" + 'Time to input what you ate for dinner' + u"\uE325" + '\n\n' + "Let's go /calories")
 
 def reminderbreakfast(update: Update, context: CallbackContext) -> int:
     if context.job_queue.get_jobs_by_name('breakfast'):
@@ -53,7 +53,7 @@ def hour_b(update: Update, _: CallbackContext) -> int:
         )   
         return HOUR_B  
     update.message.reply_text(
-        'Which MINUTE would you like to set? 0-60\n\n'
+        'Which MINUTE would you like to set? 0-59\n\n'
         'Send /cancel to stop talking to me.\n',
     )
     return MIN_B
@@ -65,7 +65,7 @@ def min_b(update: Update, context: CallbackContext) -> int:
     except ValueError:
         update.message.reply_text(
             'That is an invalid input!\n'
-            'Which MINUTE would you like to set? 0-60\n'
+            'Which MINUTE would you like to set? 0-59\n'
         )   
         return MIN_B
     t = datetime.time(hour_b_input, min_b_input,00,000000,tzinfo = pytz.timezone('Asia/Singapore'))
@@ -106,7 +106,7 @@ def hour_l(update: Update, _: CallbackContext) -> int:
         )   
         return HOUR_L 
     update.message.reply_text(
-        'Which MINUTE would you like to set? 0-60\n\n'
+        'Which MINUTE would you like to set? 0-59\n\n'
         'Send /cancel to stop talking to me.\n',
     )
     return MIN_L
@@ -118,7 +118,7 @@ def min_l(update: Update, context: CallbackContext) -> int:
     except ValueError:
         update.message.reply_text(
             'That is an invalid input!\n'
-            'Which MINUTE would you like to set? 0-60\n'
+            'Which MINUTE would you like to set? 0-59\n'
         )   
         return MIN_L
     t = datetime.time(hour_l_input, min_l_input,00,000000,tzinfo = pytz.timezone('Asia/Singapore'))
@@ -159,7 +159,7 @@ def hour_d(update: Update, _: CallbackContext) -> int:
         )   
         return HOUR_L 
     update.message.reply_text(
-        'Which MINUTE would you like to set? 0-60\n\n'
+        'Which MINUTE would you like to set? 0-59\n\n'
         'Send /cancel to stop talking to me.\n',
     )
     return MIN_D
@@ -171,7 +171,7 @@ def min_d(update: Update, context: CallbackContext) -> int:
     except ValueError:
         update.message.reply_text(
             'That is an invalid input!\n'
-            'What min would you like to set it at? 0-60\n'
+            'What min would you like to set it at? 0-59\n'
         )   
         return MIN_D
     t = datetime.time(hour_d_input, min_d_input,00,000000,tzinfo = pytz.timezone('Asia/Singapore'))

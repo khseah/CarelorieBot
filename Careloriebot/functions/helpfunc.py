@@ -8,7 +8,7 @@ from telegram.ext import (
     CallbackContext,
 )
 
-def help(update, context):
+def helps(update, context):
     update.message.reply_text(
         f"{'-'*44}\n"
         '/help : Information to commands\n'
@@ -16,6 +16,14 @@ def help(update, context):
         '/healthfacts : Obtain health tips and facts\n'
         '/bmi : Calculate your bmi\n'
         '/cancel : Cancel current command\n'
+        '/reminderbreakfast : Set breakfast reminder\n'
+        '/reminderlunch : Set lunch reminder\n'
+        '/reminderdinner : Set dinner reminder\n'
+        '/unsetbreakfast : Unset breakfast reminder\n'
+        '/unsetlunch : Unset lunch reminder\n'
+        '/unsetdinner : Unset dinner reminder\n'
+        '/diary dd/mm/yyyy : Check food diary\n'
+        '/removeitem dd/mm/yyyy : Remove food entry\n'
         f"{'-'*44}\n"
     )
 

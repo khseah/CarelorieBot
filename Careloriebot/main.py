@@ -1,14 +1,14 @@
 import logging
 import requests
-import random
 import datetime, pytz
 
-from functions.helpfunc import help
+
+from functions.helpfunc import helps
 from functions.healthfactsfunc import healthfacts
 from functions.unsetreminderfunc import unsetbreakfast, unsetdinner, unsetlunch
 from functions.bmifunc import bmi, height, weight
 from functions.setremindersfunc import breakfast, lunch, dinner, reminderbreakfast, hour_b, min_b, reminderlunch, hour_l, min_l, reminderdinner, hour_d, min_d
-from functions.caloriefunc import calories, get_calorie
+from functions.caloriefunc import calories, add_entry, get_calorie, diary, delete, deleting_item, confirm_delete
 from functions.quizfunc import quiz_start, quiz_cancel, quiz_qns
 
 # Set your bot_token here
@@ -35,6 +35,7 @@ HEIGHT, WEIGHT = range(2)
 FOOD = range(1)
 HOUR_B, MIN_B, HOUR_L, MIN_L, HOUR_D, MIN_D = range(6)
 QUIZ_QNS = range(1)
+DELETEITEM, CONFIRMDELETE = range(2)
 
 # Functions to handle each command
 def start(update, context):
@@ -58,12 +59,16 @@ def main() -> None:
     start_handler = CommandHandler('start', start) #command handler for /start
     dispatcher.add_handler(start_handler)
 
-    help_handler = CommandHandler('help', help) #command handler for /help
+    help_handler = CommandHandler('help', helps) #command handler for /help
     dispatcher.add_handler(help_handler)
+
 
     fact_handler = CommandHandler('healthfacts', healthfacts)
     dispatcher.add_handler(fact_handler)
     
+    log_handler = CommandHandler('diary', diary)
+    dispatcher.add_handler(log_handler)
+
     dispatcher.add_handler(CommandHandler("unsetbreakfast", unsetbreakfast)) #unset reminder for breakfast
 
     dispatcher.add_handler(CommandHandler("unsetlunch", unsetlunch)) #unset reminder for lunch
@@ -88,6 +93,9 @@ def main() -> None:
         fallbacks=[CommandHandler('cancel', cancel)],
     )
     dispatcher.add_handler(conv_handler)
+
+    add_handler = CommandHandler('add', add_entry)  #command handler to add food into diary
+    dispatcher.add_handler(add_handler)
 
     conv_handler = ConversationHandler(          #conversation handler for /reminder breakfast
         entry_points=[CommandHandler('reminderbreakfast', reminderbreakfast)],
@@ -127,6 +135,16 @@ def main() -> None:
         fallbacks=[CommandHandler('cancel', quiz_cancel)],
     )
     dispatcher.add_handler(quiz_handler)
+
+    conv_handler = ConversationHandler(          #conversation handler for /removeitem
+        entry_points=[CommandHandler('removeitem', delete)],
+        states={
+            DELETEITEM: [MessageHandler(Filters.text & ~Filters.command, deleting_item)],
+            CONFIRMDELETE: [MessageHandler(Filters.text & ~Filters.command, confirm_delete)],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)],
+    )
+    dispatcher.add_handler(conv_handler)
 
     updater.start_polling()
     updater.idle() # ensuress that there wont be any clashes

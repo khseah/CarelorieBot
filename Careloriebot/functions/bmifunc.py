@@ -12,7 +12,7 @@ HEIGHT, WEIGHT = range(2)
 
 def bmi(update: Update, _: CallbackContext) -> int:
     update.message.reply_text(
-        'What is your height in cm?\n\n'
+        'What is your height(cm)?\n\n'
         'Send /cancel to stop talking to me.\n',
     )
     return HEIGHT
@@ -24,11 +24,11 @@ def height(update: Update, _: CallbackContext) -> int:
     except ValueError:
         update.message.reply_text(
             'Thats not a valid input!\n'
-            'What is your height in cm?\n'
+            'What is your height(cm)?\n'
         )   
         return HEIGHT 
     height_input = height_input/100    
-    update.message.reply_text('What is your weight in kg?')
+    update.message.reply_text('What is your weight(kg)?')
     return WEIGHT
 
 def weight(update: Update, _: CallbackContext) -> int:
@@ -39,7 +39,7 @@ def weight(update: Update, _: CallbackContext) -> int:
     except ValueError:
         update.message.reply_text(
             'That is an invalid input!\n'
-            'What is your weight in kg?\n'
+            'What is your weight(kg)?\n'
         )   
         return WEIGHT 
     bmi = weight_input / (height_input*height_input)
@@ -47,7 +47,7 @@ def weight(update: Update, _: CallbackContext) -> int:
     if bmi < 18.50 :
         weight_status = 'Your weight status is: Underweight'
     elif 18.50 <= bmi < 25.00:
-        weight_status = 'Your weight status is: Normal or Healthy Weight'
+        weight_status = 'Your weight status is: Normal/Healthy Weight'
     elif 25.00 <= bmi < 30.00:
         weight_status = 'Your weight status is: Overweight'
     else: 
