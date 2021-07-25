@@ -1,2 +1,2 @@
-pythontelegrambotapi
+python-telegram-bot
 pymongo
