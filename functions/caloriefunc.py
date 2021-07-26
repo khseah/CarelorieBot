@@ -78,12 +78,12 @@ def add_entry(update, context):
     singapore = pytz.timezone("Asia/Singapore")
     local_time = datetime.datetime.now()
     sg_time = singapore.localize(local_time)
-    today = sg_time.strftime(f"%d/%m/%Y")
+    #today = sg_time.strftime(f"%d/%m/%Y")
     
     #today = date.today()
     #today = today.strftime(f"%d/%m/%Y")
     log = collection.find_one_and_update(
-        {"user": update.message.chat_id , "date": today}, #query
+        {"user": update.message.chat_id , "date": sg_time}, #query
         {'$push': {"item" : {"name":food_input, "calories": float(calorie), "protein": float(protein), "fat": float(fat), "sugar": float(sugar)}}}, #what to add to db
         upsert = True) #if theres an existing entry, add it in, else create new entry
 
