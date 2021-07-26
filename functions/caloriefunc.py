@@ -81,7 +81,7 @@ def add_entry(update, context):
     #sg_time = singapore.localize(local_time)
     #today = sg_time.strftime(f"%d/%m/%Y")
     
-    today = date.today()
+    today = datetime.datetime.today()
     #today = today.strftime(f"%d/%m/%Y")
     log = collection.find_one_and_update(
         {"user": update.message.chat_id , "date": today}, #query
