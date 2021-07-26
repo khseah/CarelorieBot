@@ -3,6 +3,7 @@ import pymongo
 from pymongo import MongoClient
 import datetime
 import pytz
+from datetime import date
 from dotenv import load_dotenv
 import os
 load_dotenv()
