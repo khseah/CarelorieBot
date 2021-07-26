@@ -64,7 +64,7 @@ def get_calorie(update: Update, _: CallbackContext) -> int:
             'Item name: ' + food_input + '\n\n'
             'Calories(kcal): ' + calorie + '\n'
             'Protein(g): ' + protein + '\n'
-            'Carohydates(g): ' + carbohydrates + '\n'
+            'Carbohydates(g): ' + carbohydrates + '\n'
             'Sugar(g): ' + sugar + '\n'
             'Fats(g): ' + fat + '\n\n'
             'Press /add to add it to your diary\n'
