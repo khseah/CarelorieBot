@@ -76,13 +76,8 @@ def get_calorie(update: Update, _: CallbackContext) -> int:
 def add_entry(update, context):
     update.message.reply_text(food_input + " has been added!")
     
-    #singapore = pytz.timezone("Asia/Singapore")
-    #local_time = datetime.datetime.now()
-    #sg_time = singapore.localize(local_time)
-    #today = sg_time.strftime(f"%d/%m/%Y")
-    
     today = datetime.datetime.today()
-    #today = today.strftime(f"%d/%m/%Y")
+    today = today.strftime(f"%d/%m/%Y")
     log = collection.find_one_and_update(
         {"user": update.message.chat_id , "date": today}, #query
         {'$push': {"item" : {"name":food_input, "calories": float(calorie), "protein": float(protein), "fat": float(fat), "sugar": float(sugar)}}}, #what to add to db
